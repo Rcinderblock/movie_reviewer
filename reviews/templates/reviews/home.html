@@ -82,7 +82,7 @@
 </head>
 <body>
     <div class="container">
-        <h1>Leave Your Review About the Film</h1>
+        <h1>Leave your review about the film</h1>
 
         <form method="post">
             {% csrf_token %}
@@ -92,8 +92,8 @@
 
         {% if review %}
             <div class="result">
-                <h2>Evaluation Result</h2>
-                <p><strong>Review:</strong> {{ review }}</p>
+                <h2>Evaluation result</h2>
+                <p><strong>Review:</strong> {{ review|truncatechars:100 }}{% if review|length > 100 %}...{% endif %}</p>
                 <p><strong>Status:</strong>
                     {% if status == 'Positive' %}
                         <span class="positive">{{ status }}</span>
