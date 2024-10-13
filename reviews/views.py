@@ -50,8 +50,7 @@ def classify_review(text):
     predicted_rating = max(1, min(10, predicted_rating))
 
     # Предсказание классификации
-    classification = 1 if predicted_rating >= 5 else 0
-    status = 'Positive' if classification == 1 else 'Negative'
+    status = 'Positive' if predicted_rating >= 5 else 'Negative'
 
     return status, predicted_rating
 
