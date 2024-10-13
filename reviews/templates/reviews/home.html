@@ -37,19 +37,6 @@
             font-size: 16px;
             resize: none;
             box-sizing: border-box;
-            position: relative;
-        }
-        .placeholder {
-            position: absolute;
-            left: 10px;
-            top: 10px;
-            color: rgba(224, 224, 224, 0.6);
-            pointer-events: none;
-            transition: all 0.2s ease;
-        }
-        textarea:focus + .placeholder,
-        textarea:not(:placeholder-shown) + .placeholder {
-            display: none;
         }
         button {
             padding: 10px 20px;
@@ -95,33 +82,28 @@
 </head>
 <body>
     <div class="container">
-        <h1>Leave your review about the film</h1>
+        <h1>Leave Your Review About the Film</h1>
 
         <form method="post">
             {% csrf_token %}
-            <div style="position: relative;">
-                <textarea id="review" name="review" placeholder=" " required>{{ review }}</textarea>
-                <label class="placeholder">Enter your review in English for evaluation</label>
-            </div>
+            {{ form.as_p }}
             <button type="submit">Rate</button>
         </form>
 
-        <div class="result">
-            <h2>Evaluation result</h2>
-            <p><strong>Review:</strong> {% if review %}{{ review|truncatechars:100 }}{% else %}No review submitted yet.{% endif %}</p>
-            <p><strong>Status:</strong>
-                {% if status %}
+        {% if review %}
+            <div class="result">
+                <h2>Evaluation Result</h2>
+                <p><strong>Review:</strong> {{ review }}</p>
+                <p><strong>Status:</strong>
                     {% if status == 'Positive' %}
                         <span class="positive">{{ status }}</span>
                     {% else %}
                         <span class="negative">{{ status }}</span>
                     {% endif %}
-                {% else %}
-                    <span>No status available.</span>
-                {% endif %}
-            </p>
-            <p><strong>Rating:</strong> {% if rating %}{{ rating }}/10{% else %}No rating available.{% endif %}</p>
-        </div>
+                </p>
+                <p><strong>Rating:</strong> {{ rating }}/10</p>
+            </div>
+        {% endif %}
     </div>
 </body>
 </html>
