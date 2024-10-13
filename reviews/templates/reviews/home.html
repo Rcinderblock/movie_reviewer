@@ -100,7 +100,7 @@
         <form method="post">
             {% csrf_token %}
             <div style="position: relative;">
-                <textarea id="review" name="review" placeholder=" " required></textarea>
+                <textarea id="review" name="review" placeholder=" " required>{{ review }}</textarea>
                 <label class="placeholder">Enter your review in English for evaluation</label>
             </div>
             <button type="submit">Rate</button>
