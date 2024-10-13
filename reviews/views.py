@@ -11,11 +11,9 @@ from nltk.stem import WordNetLemmatizer
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # Загрузка обученных моделей и векторизатора
-classifier_path = os.path.join(BASE_DIR, 'classifier_model.pkl')
 regressor_path = os.path.join(BASE_DIR, 'regressor_model.pkl')
 vectorizer_path = os.path.join(BASE_DIR, 'vectorizer.pkl')
 
-classifier = joblib.load(classifier_path)
 regressor = joblib.load(regressor_path)
 vectorizer = joblib.load(vectorizer_path)
 
@@ -44,16 +42,16 @@ def classify_review(text):
     processed_text = preprocess_text(text)
     tfidf_vector = vectorizer.transform([processed_text])
 
-    # Предсказание классификации
-    classification = classifier.predict(tfidf_vector)[0]
-    status = 'Positive' if classification == 1 else 'Negative'
-
     # Предсказание рейтинга
     predicted_rating = regressor.predict(tfidf_vector)[0]
     predicted_rating = int(round(predicted_rating))
 
     # Ограничение рейтинга в пределах 1-10
     predicted_rating = max(1, min(10, predicted_rating))
+
+    # Предсказание классификации
+    classification = 1 if predicted_rating >= 5 else 0
+    status = 'Positive' if classification == 1 else 'Negative'
 
     return status, predicted_rating
 
