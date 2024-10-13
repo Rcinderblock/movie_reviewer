@@ -25,13 +25,10 @@ def classify_review(text):
     def preprocess_text(text):
         # Удаление HTML-тегов
         text = re.sub(r'<.*?>', '', text)
-        # Удаление специальных символов и чисел
         text = re.sub(r'[^a-zA-Z\s]', '', text)
-        # Приведение к нижнему регистру
         text = text.lower()
         # Токенизация
         tokens = text.split()
-        # Удаление стоп-слов
         stop_words = set(stopwords.words('english'))
         tokens = [word for word in tokens if word not in stop_words]
         # Лемматизация
