@@ -10,16 +10,36 @@
         button { padding: 10px 20px; background-color: #28a745; color: white; border: none; cursor: pointer; }
         button:hover { background-color: #218838; }
         .container { max-width: 800px; margin: auto; }
+        .result { margin-top: 20px; }
+        .result p { font-size: 1.2em; }
+        .positive { color: green; }
+        .negative { color: red; }
     </style>
 </head>
 <body>
     <div class="container">
         <h1>Leave your review about the film</h1>
+
         <form method="post">
             {% csrf_token %}
             {{ form.as_p }}
             <button type="submit">Rate</button>
         </form>
+
+        {% if review %}
+            <div class="result">
+                <h2>Evaluation result</h2>
+                <p><strong>Review:</strong> {{ review }}</p>
+                <p><strong>Status:</strong>
+                    {% if status == 'Positive' %}
+                        <span class="positive">{{ status }}</span>
+                    {% else %}
+                        <span class="negative">{{ status }}</span>
+                    {% endif %}
+                </p>
+                <p><strong>Rating:</strong> {{ rating }}/10</p>
+            </div>
+        {% endif %}
     </div>
 </body>
 </html>
