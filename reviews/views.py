@@ -11,8 +11,8 @@ from nltk.stem import WordNetLemmatizer
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # Загрузка обученных моделей и векторизатора
-regressor_path = os.path.join(BASE_DIR, 'regressor_model.pkl')
-vectorizer_path = os.path.join(BASE_DIR, 'vectorizer.pkl')
+regressor_path = os.path.join(BASE_DIR, 'regressor_model.joblib')
+vectorizer_path = os.path.join(BASE_DIR, 'vectorizer.joblib')
 
 regressor = joblib.load(regressor_path)
 vectorizer = joblib.load(vectorizer_path)
