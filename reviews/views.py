@@ -7,10 +7,8 @@ import nltk
 from nltk.corpus import stopwords
 from nltk.stem import WordNetLemmatizer
 
-# Определите путь к моделям относительно файла views.py
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-# Загрузка обученных моделей и векторизатора
 regressor_path = os.path.join(BASE_DIR, 'regressor_model.joblib')
 vectorizer_path = os.path.join(BASE_DIR, 'vectorizer.joblib')
 
@@ -18,7 +16,6 @@ regressor = joblib.load(regressor_path)
 vectorizer = joblib.load(vectorizer_path)
 
 def classify_review(text):
-    # Предобработка текста должна быть такой же, как при обучении
     nltk.download('stopwords', quiet=True)
     nltk.download('wordnet', quiet=True)
 
